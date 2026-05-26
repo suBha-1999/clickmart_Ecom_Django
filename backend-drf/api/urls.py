@@ -1,6 +1,8 @@
 from django.urls import path
 # here we'll going to separate views based on apps
 from users import views as UserViews
+from products import views as ProductViews
+from carts import views as CartViews
 #  ------------------- for token / login----------------
 from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView
 
@@ -11,4 +13,17 @@ urlpatterns = [
     # for login we'll use token (access token/ refresh token) ------> for that neeed to install #simplejwt
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'), #-----access tokens-------
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), #----refresh tokens------
+
+
+    path('profile/', UserViews.ProfileView.as_view()),
+
+    # ---------------------Category API-----------------
+    path('categories/', ProductViews.CategoryListViews.as_view(), name='CategoryList'),
+    # ---------------------Product API------------------
+    path('products/', ProductViews.ProductListViews.as_view(), name='ProductList'),
+    path('products/<int:pk>/', ProductViews.ProductDetailsView.as_view(), name='ProductDetails'),
+
+    # --------------------Cart API -------------------------
+    path('carts/', CartViews.CartListView.as_view(), name='CartListViews'),
+
 ]

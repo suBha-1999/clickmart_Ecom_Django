@@ -1,0 +1,20 @@
+1. When you migrate any model... 
+    -----> in admin panel you can see the apps name in plural form, even you put it in singular form.
+    -----> This because of Varbose name field------>
+    -----> For solve this problem-----> in model section-------> class Meta:
+                                                                        verbose_name = 'Category'
+                                                                        verbose_name_plural = 'Catagories'
+
+
+
+
+
+
+
+
+
+
+
+
+Ask:
+1. Can you explain tokenizer working principle.(access token/ refresh token)

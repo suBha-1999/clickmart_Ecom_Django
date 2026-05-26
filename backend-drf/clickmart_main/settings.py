@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'users',
     'api',
     'products',
+    'carts',
 ]
 
 
@@ -153,3 +154,15 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME" : timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME" : timedelta(days=3) 
+}
+
+MEDIA_URL = '/media/' #-----> We are telling that media url should be  http://http://127.0.0.1:8001/media/
+MEDIA_ROOT = BASE_DIR/'media' # we are telling where to look after getting MEDIA_UR
+
+

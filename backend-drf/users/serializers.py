@@ -23,3 +23,11 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data) # ** means that whichever data is coming just took it and create an user
 
         return user
+    
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'username', 'password']
+        # read_only_fields = ['id', 'email']
+
