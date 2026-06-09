@@ -89,3 +89,8 @@ class ManageCartItemView(APIView):
         serializer = CartSerializer(item)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
+    
+    def delete(self, request, item_id):
+        item = get_object_or_404(CartItem, pk=item_id, cart__user=request.user)
+        item.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

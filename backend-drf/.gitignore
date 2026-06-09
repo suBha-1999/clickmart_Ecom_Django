@@ -181,5 +181,4 @@ cython_debug/
 
 # ----------
 # Manual Add
-../frontend/
 approach.txt

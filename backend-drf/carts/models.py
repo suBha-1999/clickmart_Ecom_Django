@@ -29,7 +29,7 @@ class Cart(models.Model):
     def grand_total(self):
         # grand_total = self.subtotal() + self.tax_amount()
         grand_total = self.subtotal + self.tax_amount # You can apply @property to run this line as telling as method
-        return grand_total
+        return grand_total.quantize(Decimal("0.00"))
 
     def __str__(self):
         return self.user.email
@@ -42,3 +42,8 @@ class CartItem(models.Model):                                              # \|/
 
     def __str__(self):
         return f"{self.product.name} x {self.quantity}"  # Apple x 1
+    
+    @property
+    def total_price(self):
+        total_price = self.product.prince * self.quantity
+        return total_price

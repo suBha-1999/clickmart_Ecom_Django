@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'api',
     'products',
     'carts',
+    'orders',
 
     'corsheaders',
 ]
@@ -169,6 +170,15 @@ SIMPLE_JWT = {
 
 MEDIA_URL = '/media/' #-----> We are telling that media url should be  http://http://127.0.0.1:8001/media/
 MEDIA_ROOT = BASE_DIR /'media' # we are telling where to look after getting MEDIA_UR
+
+
+# SMTP Connection
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
 # CORS_ALLOWED_ORIGINS = [
