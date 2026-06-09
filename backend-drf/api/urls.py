@@ -19,11 +19,18 @@ urlpatterns = [
 
     # ---------------------Category API-----------------
     path('categories/', ProductViews.CategoryListViews.as_view(), name='CategoryList'),
+
     # ---------------------Product API------------------
     path('products/', ProductViews.ProductListViews.as_view(), name='ProductList'),
     path('products/<int:pk>/', ProductViews.ProductDetailsView.as_view(), name='ProductDetails'),
 
     # --------------------Cart API -------------------------
     path('carts/', CartViews.CartListView.as_view(), name='CartListViews'),
+
+    # --------------------- Add to Cart --------------------
+    path('cart/add/', CartViews.AddToCart.as_view(), name='AddToCart'),
+
+    # --------------------- Manage -----------------------
+    path('cart/items/<int:item_id>', CartViews.ManageCartItemView.as_view(), name='ManageCartItem'),
 
 ]

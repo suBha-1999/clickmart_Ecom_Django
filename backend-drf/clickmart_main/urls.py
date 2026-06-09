@@ -28,3 +28,6 @@ from django.conf.urls.static import static
 if settings.DEBUG:  # While this project is in development mode while DEBUG==TRUE, then use this urlpattern 
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     # /media/products/----------> products in models.py imagefield
+
+# But when we deploy our software in production server, we don't serve media from django.
+# Django not made for serving media 

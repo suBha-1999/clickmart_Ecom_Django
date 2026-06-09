@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'api',
     'products',
     'carts',
+
+    'corsheaders',
 ]
 
 
@@ -52,6 +54,9 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
+    "corsheaders.middleware.CorsMiddleware",
+    
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -158,11 +163,14 @@ REST_FRAMEWORK = {
 from datetime import timedelta
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME" : timedelta(minutes=5),
+    "ACCESS_TOKEN_LIFETIME" : timedelta(minutes=20),
     "REFRESH_TOKEN_LIFETIME" : timedelta(days=3) 
 }
 
 MEDIA_URL = '/media/' #-----> We are telling that media url should be  http://http://127.0.0.1:8001/media/
-MEDIA_ROOT = BASE_DIR/'media' # we are telling where to look after getting MEDIA_UR
+MEDIA_ROOT = BASE_DIR /'media' # we are telling where to look after getting MEDIA_UR
 
 
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173/",
+# ]

@@ -177,3 +177,9 @@ cython_debug/
 # admin: subha123@gmail.com
 # Password : admin
 # ----------------------------
+
+
+# ----------
+# Manual Add
+../frontend/
+approach.txt

@@ -3,7 +3,7 @@ from .models import Cart, CartItem
 
 # Register your models here.
 
-class CartItemAdmin(admin.ModelAdmin):
+class CartItemAdmin(admin.ModelAdmin): # For Better visualization in database
     list_display = ['cart', 'product', 'quantity']
 
 
