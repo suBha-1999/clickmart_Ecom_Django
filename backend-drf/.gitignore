@@ -182,3 +182,4 @@ cython_debug/
 # ----------
 # Manual Add
 approach.txt
+.vscode/
