@@ -27,17 +27,17 @@ urlpatterns = [
     path('products/<int:pk>/', ProductViews.ProductDetailsView.as_view(), name='ProductDetails'),
 
     # --------------------Cart API -------------------------
-    path('carts/', CartViews.CartListView.as_view(), name='CartListViews'),
+    path('cart/', CartViews.CartListView.as_view(), name='CartListViews'),
 
     # --------------------- Add to Cart --------------------
     path('cart/add/', CartViews.AddToCart.as_view(), name='AddToCart'),
 
     # --------------------- Manage -----------------------
-    path('cart/items/<int:item_id>', CartViews.ManageCartItemView.as_view(), name='ManageCartItem'),
+    path('cart/items/<int:item_id>/', CartViews.ManageCartItemView.as_view(), name='ManageCartItem'),
 
 
     # -------------------- Order --------------------------
-    path('order/place/',OrderViews.PlaceOrderViews.as_view(), name='OrderViews'),
+    path('orders/place/',OrderViews.PlaceOrderViews.as_view(), name='OrderViews'),
 
     # -------------------- Orders History -----------------
     path('orders/', OrderViews.myOrdersView.as_view(), name='myOrdersview'),

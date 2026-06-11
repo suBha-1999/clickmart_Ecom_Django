@@ -4,7 +4,7 @@ from .models import Cart, CartItem
 
 class CartItemSerializer(serializers.ModelSerializer):
     product_name = serializers.CharField(source='product.name') #We also pass product name in recursive api
-    price = serializers.DecimalField(source='product.prince', max_digits=6, decimal_places=2)
+    price = serializers.DecimalField(source='product.price', max_digits=6, decimal_places=2)
     tax_percent = serializers.DecimalField(source='product.tax_percentage', max_digits=10, decimal_places=2)
     
     class Meta:

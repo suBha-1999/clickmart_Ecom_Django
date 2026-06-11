@@ -18,10 +18,10 @@ class Order(models.Model):
     grand_total = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
     address = models.CharField(max_length=200, blank=True, null=True)
-    phone_no = models.CharField(max_length=50, blank=True, null=True)
+    phone = models.CharField(max_length=50, blank=True, null=True)
     city = models.CharField(max_length=50, blank=True, null=True)
     state = models.CharField(max_length=50, blank=True, null=True)
-    zip_code = models.CharField(max_length=50, blank=True, null=True)
+    zipCode = models.CharField(max_length=50, blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
 

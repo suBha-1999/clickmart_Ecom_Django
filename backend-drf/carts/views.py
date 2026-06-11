@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from .models import Cart, CartItem
-from .serializers import CartSerializer 
+from .serializers import CartSerializer,CartItemSerializer 
 from rest_framework.response import Response
 from rest_framework import status
 from products.models import Product 
@@ -16,7 +16,7 @@ class CartListView(APIView):
         # if created:
         #     print('cart created')
         serializer = CartSerializer(cart)
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)
 
 # ================ For Add to Cart =======================
@@ -35,7 +35,7 @@ class AddToCart(APIView):
         product = get_object_or_404(Product, id=product_id, is_active=True)
 
         # Then check if there any cart available for the user or not, if not just create
-        cart, created = Cart.objects.get_or_create(user=request.user) # if you dont want to use created you can put _
+        cart, _ = Cart.objects.get_or_create(user=request.user) # if you dont want to use created you can put _
         # Here using created you can send me notification to user,
         # If there is no need of "created" you can use _
 
@@ -44,12 +44,12 @@ class AddToCart(APIView):
         
         # If created increse the quantity
         if not created:
-            item.quantity += quantity
+            item.quantity += int(quantity)
             item.save()
 
         # After all that serialize your cart
         serializer = CartSerializer(cart)
-        return Response(serializer.data, ststus=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
 # ----------- For Stock Check and update ----------------------
 class ManageCartItemView(APIView):
@@ -57,13 +57,12 @@ class ManageCartItemView(APIView):
 
     def patch(self, request, item_id): # we only need to update the quantity
         # print(request.data)
-
         # know about 'delta' 
-
         if 'change' not in request.data: # change value contain +1 or -1 for incress/decrese quantity
-            return Response({'error': 'change value is required'})
+            return Response({"error": "change value is required"})
         
         change = int(request.data.get('change')) # Here we get the change value 
+        # print(change)
         # Now we need to get that which item i want to change and who's cart is this....
         item = get_object_or_404(CartItem, pk=item_id, cart__user=request.user) 
         # If we want to add items in CartItem, need to check user and item id,
@@ -86,7 +85,7 @@ class ManageCartItemView(APIView):
         
         item.quantity = new_qty 
         item.save()
-        serializer = CartSerializer(item)
+        serializer = CartItemSerializer(item)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
     

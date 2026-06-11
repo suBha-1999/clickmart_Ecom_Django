@@ -18,7 +18,8 @@ class PlaceOrderViews(APIView):
     # Check If the cart is empty, if yes return empty Cart
     def post(self, request):
         cart = Cart.objects.get(user=request.user)
-        # shipping_address = request.data.get('shippingAddress')
+        shipping_address = request.data.get('shippingAddress')
+        # print(shipping_address)
 
         #  If cart is not empty, create Order
         if not cart or cart.items.count() == 0:
@@ -30,20 +31,32 @@ class PlaceOrderViews(APIView):
             tax_amount = cart.tax_amount,
             grand_total = cart.grand_total,
             status = 'CONFIRMED',
-            # address = shipping_address.get('address'),
-            # phone_no = shipping_address.get('phone_no'),
-            # city = shipping_address.get('city'),
-            # state = shipping_address.get('state'),
-            # zip_code = shipping_address.get('zip_code')
+            address = shipping_address.get('address'),
+            phone = shipping_address.get('phone'),
+            city = shipping_address.get('city'),
+            state = shipping_address.get('state'),
+            zipCode = shipping_address.get('zipCode'),
         )
-        
+        # print(order)
+        for item in cart.items.all():
+            product = item.product
+
+            # check quantity
+            if product.stock < item.quantity:
+                return Response({"details" : f"Only {product.stock} is left for {product.name}"},
+                                status=status.HTTP_400_BAD_REQUEST)
+            
+            # decrese the quantity
+            product.stock -= item.quantity
+            product.save()
+
         # Create the Order items and save the data
         for item in cart.items.all():
             OrderItem.objects.create(
                 order = order,
                 product = item.product,
                 quantity = item.quantity,
-                price = item.product.prince, 
+                price = item.product.price, 
                 total_price = item.total_price             
             )
 
